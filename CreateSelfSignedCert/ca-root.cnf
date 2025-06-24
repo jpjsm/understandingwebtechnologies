@@ -1,0 +1,13 @@
+[req]
+default_bits = 4096
+prompt = no
+default_md = sha256
+distinguished_name = dn
+
+[dn]
+C = ZZ
+ST = Ecstasy
+L = New Heaven
+O = CA Root
+emailAddress = certsupport@fantasyland.test
+CN = Fantasyland Cert Authority

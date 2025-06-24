@@ -1,0 +1,62 @@
+[
+  {
+    "Kind": "http",
+    "CanaryName": "IngressProxy",
+    "Version": "v_0.02",
+    "Properties": {
+
+    },
+    "DimensionHierarchy": [ "IngressProxy" ],
+    "Test": {
+      "verb": "GET",
+      "url": "https://changemanager.fcm.azure.microsoft.com/index.html",
+      "payload": "",
+      "lowest_httpcode": "200",
+      "highest_httpcode": "299",
+      "timeout": "3000"
+    },
+    "Frequency_Hour": "3600",
+    "UserName": "",
+    "Password": ""
+  },
+  {
+    "Kind": "http",
+    "CanaryName": "ChangeAssessment",
+    "Properties": {
+
+    },
+    "DimensionHierarchy": [ "ChangeAssessment", "Ev2", "RolloutId", "200" ],
+    "Version": "v_0.01",
+    "Test": {
+      "verb": "GET",
+      "url": "https://changemanager.fcm.azure.microsoft.com/api/changeassessment/ev2/3CDEEC4A-452D-4BAB-9A76-532C4EC8C1F9",
+      "payload": "",
+      "lowest_httpcode": "200",
+      "highest_httpcode": "299",
+      "timeout": "3000"
+    },
+    "Frequency_Hour": "3600",
+    "UserName": "",
+    "Password": ""
+  },
+  {
+    "Kind": "http",
+    "CanaryName": "ChangeAssessment",
+    "Version": "v_0.01",
+    "Properties": {
+
+    },
+    "DimensionHierarchy": [ "ChangeAssessment", "Ev2", "RolloutId", "204" ],
+    "Test": {
+      "verb": "GET",
+      "url": "https://changemanager.fcm.azure.microsoft.com/api/changeassessment/ev2/2A2970B2-6786-4E58-9065-ECF4A21AC6F3",
+      "payload": "",
+      "lowest_httpcode": "200",
+      "highest_httpcode": "299",
+      "timeout": "3000"
+    },
+    "Frequency_Hour": "3600",
+    "UserName": "",
+    "Password": ""
+  }
+]

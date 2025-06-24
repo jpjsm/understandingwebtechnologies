@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbCrudCore", "DbCrudCore.csproj", "{2AD643B0-EC6D-475C-AA04-51EA64B88A1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AD643B0-EC6D-475C-AA04-51EA64B88A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AD643B0-EC6D-475C-AA04-51EA64B88A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AD643B0-EC6D-475C-AA04-51EA64B88A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AD643B0-EC6D-475C-AA04-51EA64B88A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10F680CF-736B-4551-A6D9-FEF56CE30AB3}
+	EndGlobalSection
+EndGlobal

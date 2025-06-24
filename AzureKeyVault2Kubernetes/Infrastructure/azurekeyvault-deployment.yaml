@@ -1,0 +1,70 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: webapi-deployment
+  namespace: azurekeyvault-ns
+  labels:
+    app: webapi
+    app-version: V_0.05
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapi
+      app-version: V_0.05
+  template:
+    metadata:
+      labels:
+        app: webapi
+        app-version: V_0.05
+    spec:
+      containers:
+        - name: webapi
+          image: fcmtest03westus2acr.azurecr.io/webapi:V_0.05
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          volumeMounts:
+          - name: secrets-store-inline
+            mountPath: "/app/secrets"
+            readOnly: true
+      restartPolicy: Always        
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "azure-kvmap"
+            nodePublishSecretRef:
+              name: secrets-store-creds
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ingress-deployment
+  namespace: azurekeyvault-ns
+  labels:
+    app: ingress
+    app-version: 1.0.1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ingress
+      app-version: 1.0.1
+  template:
+    metadata:
+      labels:
+        app: ingress
+        app-version: 1.0.1      
+    spec:
+      containers:
+        - name: ingress
+          image: fcmtest03westus2acr.azurecr.io/ingress:V_0.05
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+      restartPolicy: Always

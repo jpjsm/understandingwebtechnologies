@@ -1,0 +1,1 @@
+curl -k -w "\nHTTP StatusCode: %{http_code}\n" "http://servicesinformation/ServicesInfo/approvers?serviceIds=a1000000-1000-0000-0000-000000000000&serviceIds=aa000000-8000-0000-0000-000000000000&serviceIds=a7000000-3000-0000-0000-000000000000"

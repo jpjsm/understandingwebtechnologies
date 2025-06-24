@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress
+  namespace: azurekeyvault-ns
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: fcm-test03-westus2rg
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 20.190.9.150
+  selector:
+    app: ingress
+    app-version: 1.0.1
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 80
+    - protocol: TCP
+      name: ssl
+      port: 443
+      targetPort: 443
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: webapi
+  namespace: azurekeyvault-ns
+spec:
+  type: ClusterIP
+  selector:
+    app: webapi
+    app-version: V_0.05
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

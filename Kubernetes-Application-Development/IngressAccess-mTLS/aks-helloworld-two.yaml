@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hostname-mtls-two  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostname-mtls-two
+  template:
+    metadata:
+      labels:
+        app: hostname-mtls-two
+    spec:
+      containers:
+      - name: flask-hostname
+        image: jpjofresm/flask-hostname:1.0.2
+        ports:
+        - containerPort: 5000
+        env:
+        - name: TITLE
+          value: "Welcome to Azure Kubernetes Service (AKS)"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostname-mtls-two  
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5000
+  selector:
+    app: hostname-mtls-two

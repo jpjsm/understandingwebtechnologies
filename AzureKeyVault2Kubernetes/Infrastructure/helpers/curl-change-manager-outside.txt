@@ -1,0 +1,14 @@
+curl -k -w "\nHTTP StatusCode: %{http_code}\n" --cert C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt --key C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt.key "https://change-manager.fcm.test/internal/ServicesInfo/approvers?serviceIds=a1000000-1000-0000-0000-000000000000&serviceIds=aa000000-8000-0000-0000-000000000000&serviceIds=a7000000-3000-0000-0000-000000000000"
+
+curl -k -w "\nHTTP StatusCode: %{http_code}\n" --cert C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt --key C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt.key "https://change-manager.fcm.test/internal/EventsRetrieval/events?startDate=2020-09-06&endDate=2020-09-12&regions=north%20america"
+
+curl -k -w "\nHTTP StatusCode: %{http_code}\n" --cert C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt --key C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt.key "https://change-manager.fcm.test/api/EventsRetrieval/events?startDate=2020-09-06&endDate=2020-09-11&regions=Middle%20Asia&regions=North%20America"
+
+curl -k -w "\nHTTP StatusCode: %{http_code}\n" http://localhost:9753/exceptionrequestmanager/eventsretrieval/events"
+
+curl -k -w "\nHTTP StatusCode: %{http_code}\n" --cert C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt --key C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt.key "https://change-manager.fcm.test/api/exceptionrequestmanager"
+
+curl -k -w "\nHTTP StatusCode: %{http_code}\n" --cert C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt --key C:\FCM\fcm-ChangeManager\Infrastructure\mtls-certs\change-manager-client.fcm.test.crt.key "https://change-manager.fcm.test/internal/echo-hostname/foo/bar"
+
+curl -w "\nHTTP StatusCode: %{http_code}\n" http://changeassessment/changeassessmentswagger/index.html
+

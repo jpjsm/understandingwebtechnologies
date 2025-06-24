@@ -1,0 +1,959 @@
+﻿{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Sample API",
+    "description": "Description for the API goes here.",
+    "contact": {
+      "name": "JuanPablo Jofre",
+      "url": "https://SuperDuper.test/",
+      "email": "JuanPabloJofre@SuperDuper.test"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/Approvers": {
+      "get": {
+        "tags": [
+          "Approvers"
+        ],
+        "operationId": "Approvers",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproversQry"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproversQry"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproversQry"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApproverInfo"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApproverInfo"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApproverInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DeploymentAuthorization": {
+      "get": {
+        "tags": [
+          "DeploymentAuthorization"
+        ],
+        "operationId": "DeploymentAuthorizationAll",
+        "parameters": [
+          {
+            "name": "ServiceId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "RequestorEmail",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SubscriptionIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "Statuses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "$ref": "#/components/schemas/ExceptionRequestStatus"
+              }
+            }
+          },
+          {
+            "name": "RequestedStartFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "RequestedUpTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeploymentAuthorization"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeploymentAuthorization"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeploymentAuthorization"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DeploymentAuthorization"
+        ],
+        "operationId": "DeploymentAuthorization",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Deployment"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Deployment"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Deployment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeploymentAuthorization"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeploymentAuthorization"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeploymentAuthorization"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DeploymentAuthorization/{id}": {
+      "get": {
+        "tags": [
+          "DeploymentAuthorization"
+        ],
+        "operationId": "DeploymentAuthorization2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeploymentAuthorization"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeploymentAuthorization"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeploymentAuthorization"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EventsRetrieval": {
+      "get": {
+        "tags": [
+          "EventsRetrieval"
+        ],
+        "operationId": "EventsRetrieval",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventsQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventsQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventsQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventsInPlace"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventsInPlace"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventsInPlace"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ExceptionRequest": {
+      "get": {
+        "tags": [
+          "ExceptionRequest"
+        ],
+        "operationId": "ExceptionRequestAll",
+        "parameters": [
+          {
+            "name": "ServiceIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "ApproverEmail",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "RequestorEmail",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "SubscriptionIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "nullable": true,
+              "items": {
+                "$ref": "#/components/schemas/ExceptionRequestStatus"
+              }
+            }
+          },
+          {
+            "name": "RequestedStartFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "RequestedUpTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExceptionRequest"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExceptionRequest"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExceptionRequest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ExceptionRequest/{exceptionRequestId}": {
+      "get": {
+        "tags": [
+          "ExceptionRequest"
+        ],
+        "operationId": "ExceptionRequest",
+        "parameters": [
+          {
+            "name": "exceptionRequestId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionRequest"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionRequest"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExceptionRequest"
+        ],
+        "operationId": "ExceptionRequest2",
+        "parameters": [
+          {
+            "name": "exceptionRequestId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/ExceptionRequest/ExceptionRequest/fromdeclined": {
+      "post": {
+        "tags": [
+          "ExceptionRequest"
+        ],
+        "operationId": "fromdeclined",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeploymentAuthorization"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeploymentAuthorization"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeploymentAuthorization"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/ExceptionRequest/ExceptionRequest/preapproval": {
+      "post": {
+        "tags": [
+          "ExceptionRequest"
+        ],
+        "operationId": "preapproval",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionRequestBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionRequestBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApproversQry": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "services": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "ApproverInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "approverId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "approverName": {
+            "type": "string",
+            "nullable": true
+          },
+          "approverEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "serviceIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "ExceptionRequestStatus": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "RegionApproval": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventsInPlace": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "deploymentApproved": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SubscriptionApproval": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventsInPlace": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "deploymentApprovedForEntireSubscription": {
+            "type": "boolean"
+          },
+          "regions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RegionApproval"
+            }
+          },
+          "exceptionRequests": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "DeploymentAuthorization": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true,
+            "format": "uuid"
+          },
+          "authorizationRequestDate": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time"
+          },
+          "deploymentId": {
+            "type": "string",
+            "readOnly": true,
+            "format": "uuid"
+          },
+          "requestor": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestorEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "deploymentEstimatedStart": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time"
+          },
+          "deploymentEstimatedEnd": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time"
+          },
+          "serviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "subscriptions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/SubscriptionApproval"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExceptionRequestStatus"
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "regions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Deployment": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "requestor": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestorEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "deploymentEstimatedStart": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deploymentEstimatedEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "serviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "subscriptions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Subscription"
+            }
+          }
+        }
+      },
+      "EventsQuery": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "regions": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RegionEvents": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "events": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "EventsInPlace": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "eventsPerRegion": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RegionEvents"
+            }
+          }
+        }
+      },
+      "StatusChange": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ExceptionRequestStatus"
+          },
+          "changeDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ApproverNotes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "approverId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ExceptionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "exceptionRequestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requestorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestorEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessJustification": {
+            "type": "string",
+            "nullable": true
+          },
+          "deployment": {
+            "$ref": "#/components/schemas/DeploymentAuthorization"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExceptionRequestStatus"
+          },
+          "approverId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "approverName": {
+            "type": "string",
+            "nullable": true
+          },
+          "approverEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "formerApproverIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "changeStatus": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/StatusChange"
+            }
+          },
+          "approversNotes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ApproverNotes"
+            }
+          }
+        }
+      },
+      "ExceptionRequestBody": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "requestorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestorEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "deployment": {
+            "$ref": "#/components/schemas/Deployment"
+          }
+        }
+      }
+    }
+  }
+}

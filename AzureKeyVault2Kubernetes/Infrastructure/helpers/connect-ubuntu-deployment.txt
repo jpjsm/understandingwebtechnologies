@@ -1,0 +1,1 @@
+kubectl exec --namespace azurekeyvault-ns -it pod/ubuntu-deployment-c79dc9494-cglcc -- /bin/bash 

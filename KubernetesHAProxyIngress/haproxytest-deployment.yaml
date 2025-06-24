@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: echo-hostname-deployment
+  namespace: haproxytest-ns
+  labels:
+    app: echo-hostname
+    app-version: 1.0.1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-hostname
+      app-version: 1.0.1
+  template:
+    metadata:
+      labels:
+        app: echo-hostname
+        app-version: 1.0.1      
+    spec:
+      containers:
+        - name: flask-hostname
+          image: jpjofresm/flask-hostname:2.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+      restartPolicy: Always

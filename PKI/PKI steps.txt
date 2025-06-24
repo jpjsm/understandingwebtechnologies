@@ -1,0 +1,95 @@
+#  Create Root CA (for FCM Change Risk Estimator project)
+#  -  In this case, we'll skip the signing CA and make the Root a signing agent
+#  -  See: etc/root-ca.conf
+
+# Create a folder PKI and move to it
+# -  Crete the following folders and files
+mkdir -p ca/root-ca/private ca/root-ca/db crl certs etc
+cp /dev/null ca/root-ca/db/root-ca.db
+cp /dev/null ca/root-ca/db/root-ca.db.attr
+echo 01 > ca/root-ca/db/root-ca.crt.srl
+echo 01 > ca/root-ca/db/root-ca.crl.srl
+
+# copy all *.conf files to the etc folder
+
+
+openssl req -new -config etc/root-ca.conf -out ca/root-ca.csr -keyout ca/root-ca/private/root-ca.key
+
+openssl ca -selfsign -config etc/root-ca.conf -in ca/root-ca.csr -out ca/root-ca.crt -extensions root_ca_ext
+
+#  Create ChangeRiskEstimator certificate
+
+#  - create the request
+openssl req -new -config etc/cre.conf -out certs/cre.fcm.test.csr -keyout certs/cre.fcm.test.key -extensions server_reqext
+
+openssl req -noout -text -in certs/cre.fcm.test.csr | grep DNS  # check SAN (alternate subject names) on request
+
+#  - create the certificate
+openssl x509 -req -in certs/cre.fcm.test.csr -signkey ca/root-ca/private/root-ca.key  -out certs/cre.fcm.test.crt -extfile etc/cre.conf -extensions server_reqext
+
+openssl x509 -in certs/cre.fcm.test.crt -text -noout | grep DNS  # check SAN (alternate subject names) on certificate
+
+
+#  Create Events Retrieval certificate
+
+#  - create the request
+openssl req -new -config etc/EventsRetrieval.conf -out certs/er.fcm.test.csr -keyout certs/er.fcm.test.key -extensions server_reqext
+
+openssl req -noout -text -in certs/er.fcm.test.csr | grep DNS  # check SAN (alternate subject names) on request
+
+#  - create the certificate
+openssl x509 -req -in certs/er.fcm.test.csr -signkey ca/root-ca/private/root-ca.key  -out certs/er.fcm.test.crt -extfile etc/EventsRetrieval.conf -extensions server_reqext
+
+openssl x509 -in certs/er.fcm.test.crt -text -noout | grep DNS  # check SAN (alternate subject names) on certificate
+
+#  Create Services Information certificate
+
+#  - create the request
+openssl req -new -config etc/ServicesInformation.conf -out certs/si.fcm.test.csr -keyout certs/si.fcm.test.key -extensions server_reqext
+
+openssl req -noout -text -in certs/si.fcm.test.csr | grep DNS  # check SAN (alternate subject names) on request
+
+#  - create the certificate
+openssl x509 -req -in certs/si.fcm.test.csr -signkey ca/root-ca/private/root-ca.key  -out certs/si.fcm.test.crt -extfile etc/ServicesInformation.conf -extensions server_reqext
+
+openssl x509 -in certs/si.fcm.test.crt -text -noout | grep DNS  # check SAN (alternate subject names) on certificate
+
+#  Create Exception Request Management certificate
+
+#  - create the request
+openssl req -new -config etc/ExceptionRequestManagement.conf -out certs/erm.fcm.test.csr -keyout certs/erm.fcm.test.key -extensions server_reqext
+
+openssl req -noout -text -in certs/erm.fcm.test.csr | grep DNS  # check SAN (alternate subject names) on request
+
+#  - create the certificate
+openssl x509 -req -in certs/erm.fcm.test.csr -signkey ca/root-ca/private/root-ca.key  -out certs/erm.fcm.test.crt -extfile etc/ExceptionRequestManagement.conf -extensions server_reqext
+
+openssl x509 -in certs/erm.fcm.test.crt -text -noout | grep DNS  # check SAN (alternate subject names) on certificate
+
+#  Create Exception Request Management - UI certificate
+
+#  - create the request
+openssl req -new -config etc/ExceptionRequestManagementUI.conf -out certs/erm-ui.fcm.test.csr -keyout certs/erm-ui.fcm.test.key -extensions server_reqext
+
+openssl req -noout -text -in certs/erm-ui.fcm.test.csr | grep DNS  # check SAN (alternate subject names) on request
+
+#  - create the certificate
+openssl x509 -req -in certs/erm-ui.fcm.test.csr -signkey ca/root-ca/private/root-ca.key  -out certs/erm-ui.fcm.test.crt -extfile etc/ExceptionRequestManagementUI.conf -extensions server_reqext
+
+openssl x509 -in certs/erm-ui.fcm.test.crt -text -noout | grep DNS  # check SAN (alternate subject names) on certificate
+
+## Create chained certs
+cp certs/cre.fcm.test.crt certs/cre-chained.fcm.test.crt;echo >> certs/cre-chained.fcm.test.crt; cat CA/root-ca.crt >> certs/cre-chained.fcm.test.crt
+
+## Create chained PFXs for Kestrel
+
+openssl pkcs12 -export -out certs/cre-chained.fcm.test.pfx  -inkey certs/cre-chained.fcm.test.key -in certs/cre.fcm.test.crt -certfile certs/cre-chained.fcm.test.crt
+
+openssl pkcs12 -export -in certs/er.fcm.test.crt -inkey CA/root-ca/private/root-ca.key -out certs/er-chained.fcm.test.pfx -certfile CA/root-ca.crt
+openssl pkcs12 -export -in certs/erm.fcm.test.crt -inkey CA/root-ca/private/root-ca.key -out certs/erm-chained.fcm.test.pfx -certfile CA/root-ca.crt
+openssl pkcs12 -export -in certs/erm-ui.fcm.test.crt -inkey CA/root-ca/private/root-ca.key -out certs/erm-ui-chained.fcm.test.pfx -certfile CA/root-ca.crt
+openssl pkcs12 -export -in certs/si.fcm.test.crt -inkey CA/root-ca/private/root-ca.key -out certs/si-chained.fcm.test.pfx -certfile CA/root-ca.crt
+
+## Create PFX trusted root for local browser
+
+openssl pkcs12 -export -in CA/root-ca.crt -inkey CA/root-ca/private/root-ca.key -out CA/root-ca.fcm.test.pfx

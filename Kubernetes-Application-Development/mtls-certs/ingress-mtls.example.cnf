@@ -1,0 +1,24 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[dn]
+C = US
+ST = WA
+L = Redmond
+O = Ingress mTLS
+emailAddress = support@ingress-mtls.example
+CN = ingress-mtls.example
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = ingress-mtls.example
+DNS.2 = www.ingress-mtls.example
+DNS.3 = tls.ingress-mtls.example
+DNS.4 = ingress-mtls.test
+DNS.5 = tls.ingress-mtls.test

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "canarysvc": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

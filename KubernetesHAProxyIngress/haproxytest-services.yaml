@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: echo-hostname
+  namespace: haproxytest-ns
+spec:
+  type: ClusterIP
+  selector:
+    app: echo-hostname
+    app-version: 1.0.1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

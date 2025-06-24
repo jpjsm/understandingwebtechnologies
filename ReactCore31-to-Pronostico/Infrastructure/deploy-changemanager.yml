@@ -1,0 +1,75 @@
+## Pronostico microservice
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pronostico
+  labels:
+    app: reactcore31topronostico
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: pronostico
+  template:
+    metadata:
+      labels:
+        app: reactcore31topronostico
+        service: pronostico
+    spec:
+      containers:
+        - name: pronostico
+          image: fcmreact2apidemowestus2acr.azurecr.io/pronostico:V_14
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+            - name: pronosticobackend_BaseAddress
+              value: http://pronosticobackend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pronostico
+  labels:
+    app: reactcore31topronostico
+    service: pronostico
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    service: pronostico
+---
+## pronosticobackend microservice
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pronosticobackend
+  labels:
+    app: reactcore31topronostico
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: pronosticobackend
+  template:
+    metadata:
+      labels:
+        app: reactcore31topronostico
+        service: pronosticobackend
+    spec:
+      containers:
+        - name: pronostico
+          image: fcmreact2apidemowestus2acr.azurecr.io/pronosticobackend:V_14
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80

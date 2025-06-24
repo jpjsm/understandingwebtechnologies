@@ -1,0 +1,1 @@
+openssl req -new -x509 -newkey rsa:4096 -sha256 -nodes -keyout ingress-basic.example.key -days 3560 -out ingress-basic.example.crt -config ingress-basic.example.cnf

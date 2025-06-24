@@ -1,0 +1,2 @@
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout selfsignedcert.key -out selfsignedcert.crt -subj "/CN=selfsigned.test" -addext "subjectAltName=DNS:selfsigned.test,DNS:www.selfsigned.test,IP:192.0.2.1"
+openssl pkcs12 -export -out selfsignedcert.pfx -inkey selfsignedcert.key -in selfsignedcert.crt

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  server:
+    image: nginx_oauth2_proxy:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/signin.conf:/etc/nginx/signin.conf:ro
+      - ./site:/usr/share/nginx/html:ro
+      - ./misc/oauth2-proxy.cfg:/etc/oauth2-proxy/oauth2-proxy.cfg:ro
+      - ./nginx/changemanager.fcm.msftcloudes.com.key:/etc/nginx/secrets/changemanager.fcm.msftcloudes.com.key:ro
+      - ./nginx/changemanager.fcm.msftcloudes.com.pem:/etc/nginx/secrets/changemanager.fcm.msftcloudes.com.pem:ro
+    ports:
+    - "127.0.0.1:8080:80"
+    - "127.0.0.1:44300:443"

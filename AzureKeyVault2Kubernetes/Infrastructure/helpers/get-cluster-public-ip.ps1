@@ -1,0 +1,1 @@
+az network public-ip show --name fcm-changemanager-public-ip --resource-group MC_fcm-changemanager-static-network-westus2_fcmchgmgrstaticaks_westus2
