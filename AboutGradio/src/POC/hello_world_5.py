@@ -9,6 +9,7 @@ def create_dynamic_outputs(num_outputs):
 
 
 with gr.Blocks() as demo:
+    gr.Markdown("# Chatbot demo !")
     num_slider = gr.Slider(minimum=1, maximum=5, step=1, label="Number of Outputs")
 
     # The @gr.render decorator makes this function re-run and render components
